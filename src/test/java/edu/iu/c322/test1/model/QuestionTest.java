@@ -12,7 +12,7 @@ class QuestionTest {
                 "Which word matches the image?",
                 "elephant",
                 new String[]{"tiger", "bear", "elephant"});
-        String expected = "1,Which word matches the image?,elephant,tiger,bear,elephant";
+        String expected = "1, Which word matches the image?,elephant,tiger,bear,elephant";
         assertEquals(expected, q.toLine());
     }
 
