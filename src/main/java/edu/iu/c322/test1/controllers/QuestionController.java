@@ -27,7 +27,7 @@ public class QuestionController {
             throw new RuntimeException(e);
         }
     }
-
+    @GetMapping("/search")
     public List<Question> findAll() {
         try {
             return fileRepository.findAll();
