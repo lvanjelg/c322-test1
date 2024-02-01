@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/questions")
 public class QuestionController {
 
     private FileRepository fileRepository;
@@ -20,8 +19,7 @@ public class QuestionController {
     public QuestionController(FileRepository fileRepository) {
         this.fileRepository = fileRepository;
     }
-
-
+    @RequestMapping("/add/{question}")
     public boolean add(@RequestBody Question question) {
         try {
             return fileRepository.add(question);
@@ -29,7 +27,6 @@ public class QuestionController {
             throw new RuntimeException(e);
         }
     }
-
 
     public List<Question> findAll() {
         try {
@@ -39,8 +36,8 @@ public class QuestionController {
         }
     }
 
-    @GetMapping("/search")
-    public List<Question> find( String answer) {
+    @GetMapping("/search/{answer}")
+    public List<Question> find(@PathVariable String answer) {
         try {
             return fileRepository.find(answer);
         } catch (IOException e) {
@@ -49,7 +46,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}")
-    public Question get( int id) {
+    public Question get(@PathVariable int id) {
         try {
             return fileRepository.get(id);
         } catch (IOException e) {
@@ -58,7 +55,7 @@ public class QuestionController {
     }
 
     @PostMapping("/{id}/image")
-    public boolean updateImage(int id,
+    public boolean updateImage(@PathVariable int id,
                                 MultipartFile file) {
         try {
             return fileRepository.updateImage(id, file);
@@ -68,7 +65,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}/image")
-    public ResponseEntity<?> getImage(int id) {
+    public ResponseEntity<?> getImage(@PathVariable int id) {
         try {
             byte[] image = fileRepository.getImage(id);
             return ResponseEntity.status(HttpStatus.FOUND)
