@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -22,7 +23,7 @@ class FileRepositoryTest {
 
     @AfterAll
     static void cleanup() throws IOException {
-        Files.delete(Paths.get("questions-test.txt"));
+        Files.delete(Paths.get("questions.txt"));
     }
 
     @Test
